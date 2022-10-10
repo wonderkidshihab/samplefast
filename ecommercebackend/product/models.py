@@ -5,7 +5,7 @@ from django.contrib.postgres.fields import ArrayField
 class Category(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField(null=True, blank=True)
-    image = models.ImageField(upload_to='category', null=True, blank=True)
+    image = models.ImageField(upload_to='static/category', null=True, blank=True)
     slug = models.SlugField(max_length=50, unique=True, null=True, blank=True)
 
     def __str__(self):
@@ -15,7 +15,7 @@ class Category(models.Model):
 class SubCategory(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField(null=True, blank=True)
-    image = models.ImageField(upload_to='subcategory', null=True, blank=True)
+    image = models.ImageField(upload_to='static/subcategory', null=True, blank=True)
     slug = models.SlugField(max_length=50, unique=True, null=True, blank=True)
     category = models.ForeignKey('Category', on_delete=models.CASCADE)
 
@@ -26,8 +26,8 @@ class SubCategory(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField(null=True, blank=True)
-    thumbnail = models.ImageField(upload_to='product', null=True, blank=True)
-    images = ArrayField(models.ImageField(upload_to='product', null=True, blank=True), size=5, null=True, blank=True)
+    thumbnail = models.ImageField(upload_to='static/product', null=True, blank=True)
+    images = ArrayField(models.ImageField(upload_to='static/product', null=True, blank=True), size=5, null=True, blank=True)
     slug = models.SlugField(max_length=50, unique=True, null=True, blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     category = models.ForeignKey('Category', on_delete=models.CASCADE)
